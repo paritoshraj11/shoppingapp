@@ -48,7 +48,6 @@ class ListContainer extends React.Component {
 
 const renderItem = ({ data, index }) => {
   let imageSource = data.images && data.images[0];
-  console.log(">>>> data >>>", data);
   return (
     <div className="col-md-3  col-6 ">
       <Link to={`/item-details/${data._id}`}>
