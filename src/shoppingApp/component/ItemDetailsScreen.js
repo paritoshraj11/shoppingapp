@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-var toHex = require("colornames");
+import ImageGallary from "./ImageGallary";
 
 export default class ItemDetailsScreen extends Component {
   render() {
@@ -7,12 +7,11 @@ export default class ItemDetailsScreen extends Component {
     if (!product_details) {
       return null;
     }
-    console.log(">>> product details >>>>>", JSON.stringify(availableAttributes));
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 border">
-            <h1>image coursel</h1>
+            <ImageGallary images={product_details.images} />
           </div>
           <div className="col-md-6 border">
             <div>
