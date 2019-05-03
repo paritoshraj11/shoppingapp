@@ -84,6 +84,35 @@ export default class ItemDetail extends React.Component {
     return Object.assign({}, primary_product, product_variation_detail);
   };
 
+  selectColor = colorId => {
+    let { selectedAttributes, primary_product, product_variations } = this.state;
+    selectedAttributes["Colour"] = colorId;
+    let product_details = this.getProductDetails({
+      primary_product,
+      product_variations,
+      selected_option_ids: Object.values(selectedAttributes)
+    });
+
+    this.setState({
+      selectedAttributes: selectedAttributes,
+      product_details
+    });
+  };
+
+  selectStorage = storageId => {
+    let { selectedAttributes, primary_product, product_variations } = this.state;
+    selectedAttributes["Storage"] = storageId;
+    let product_details = this.getProductDetails({
+      primary_product,
+      product_variations,
+      selected_option_ids: Object.values(selectedAttributes)
+    });
+    this.setState({
+      selectedAttributes: selectedAttributes,
+      product_details
+    });
+  };
+
   render() {
     let { product_details, selectedAttributes, availableAttributes } = this.state;
     return (
@@ -91,6 +120,8 @@ export default class ItemDetail extends React.Component {
         product_details={product_details}
         selectedAttributes={selectedAttributes}
         availableAttributes={availableAttributes}
+        selectColor={this.selectColor}
+        selectStorage={this.selectStorage}
       />
     );
   }
