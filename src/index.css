@@ -16,6 +16,22 @@ html {
   padding: 20px;
 }
 
+.thumbnail_images {
+  background-size: 100% 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+.gallery_image {
+  width: 100%;
+  height: 230px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+@media only screen and (max-width: 576px) {
+  .card-img-top {
+    height: 40vw !important;
+  }
 }

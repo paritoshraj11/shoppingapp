@@ -51,12 +51,11 @@ const renderItem = ({ data, index }) => {
   return (
     <div className="col-md-3  col-6 ">
       <Link to={`/item-details/${data._id}`}>
-        <img
-          className="card-img-top"
-          alt="image"
-          style={{ height: "20vw", objectFit: "contain", width: "100%" }}
-          src={imageSource}
-        />
+        {/* {<div className="gallery_image">
+          <img className="card-img-top img-fluid" alt="image" style={{}} src={imageSource} />
+        </div>} */}
+        <img className="card-img-top" alt="image" style={{ height: "20vw" }} src={imageSource} />
+
         <div className="card-body">
           <p className="card-text">{data.name}</p>
           <p className="card-text">{` ₹ ${Math.ceil(data.sale_price)}`}</p>
