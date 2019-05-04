@@ -12,6 +12,10 @@ html {
   overflow: hidden;
 } */
 
+* {
+  font-family: Roboto;
+}
+
 .product_list_container > * {
   padding: 20px;
 }
@@ -30,8 +34,90 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+.product-card__image {
+  height: 20vw !important;
+  width: 100%;
+}
+
+.product-card__name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  color: black;
+  font-weight: 100;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.product-card__price {
+  color: black;
+  margin-bottom: 0px;
+}
+
+.product-description__container {
+  padding: 15px 0;
+}
+
+.product-description__title {
+  margin: 0 0 2px 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.product-description__text {
+  margin: 10px 0 0 0;
+  font-size: 12px;
+}
+
+.product-description__title__border {
+  width: 10%;
+  border: 2px solid rgb(62, 173, 161);
+}
+
+.product-description__dividor {
+  margin: 1em 0 1em 0;
+}
+
+.attribute_selector_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px 0 10px 0;
+}
+.color_selector_box {
+  flex-direction: row;
+  display: flex;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px 8px 8px;
+  border-radius: 5px;
+}
+
+.color_selector_circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.size_selector_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+  border: 1px solid rgb(217, 217, 217);
+  margin-right: 20px;
+}
+.p10{
+  padding: 10px 0 10px 0
+}
+
 @media only screen and (max-width: 576px) {
-  .card-img-top {
+  .product-card__image {
     height: 40vw !important;
   }
 }

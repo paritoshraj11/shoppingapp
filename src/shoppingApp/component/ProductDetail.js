@@ -1,6 +1,6 @@
 import React from "react";
 import { nativeFetch, isArrayEqaul } from "../clientUtility";
-import ItemDetailsScreen from "./ItemDetailsScreen";
+import ProductDetailScreen from "./ProductDetailScreen";
 
 const PRODUCT_DETAIL_URL = "https://assignment-appstreet.herokuapp.com/api/v1/products/";
 
@@ -59,7 +59,6 @@ export default class ItemDetail extends React.Component {
       });
     });
     let product_details = this.getProductDetails({ primary_product, selected_option_ids, product_variations });
-    console.log(">>>>> final product details >>>>", product_details);
     //setting initial state for the product :::
 
     this.setState({
@@ -116,7 +115,7 @@ export default class ItemDetail extends React.Component {
   render() {
     let { product_details, selectedAttributes, availableAttributes } = this.state;
     return (
-      <ItemDetailsScreen
+      <ProductDetailScreen
         product_details={product_details}
         selectedAttributes={selectedAttributes}
         availableAttributes={availableAttributes}

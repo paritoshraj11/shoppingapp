@@ -21,7 +21,7 @@ export default class MyComponent extends React.Component {
         <Carousel infinite onChange={this.onChange} value={this.state.value}>
           {images.map(image => {
             return (
-              <div style={{ height: 400, width: "100%", border: "1px solid blue" }}>
+              <div style={{ height: 400, width: "100%" }}>
                 <img src={image} style={{ height: "100%", width: "100%", objectFit: "contain" }} />
               </div>
             );
