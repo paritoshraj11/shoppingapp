@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import AppContext from "../AppContext";
 import ProductListScreen from "./ProductListScreen";
 import { nativeFetch } from "../clientUtility";

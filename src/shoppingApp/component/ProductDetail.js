@@ -7,7 +7,8 @@ const PRODUCT_DETAIL_URL = "https://assignment-appstreet.herokuapp.com/api/v1/pr
 
 class ProductDetail extends React.Component {
   state = {
-    data: null
+    data: null,
+    count: 1
   };
 
   getCurrentId = () => {
@@ -17,7 +18,7 @@ class ProductDetail extends React.Component {
   };
 
   componentDidMount() {
-    let { toggleFooter, footerVisible, toggleLoader } = this.props;
+    let { toggleFooter, toggleLoader } = this.props;
     toggleFooter && toggleFooter(false);
     toggleLoader && toggleLoader(true);
     let currentProductId = this.getCurrentId();
@@ -28,9 +29,8 @@ class ProductDetail extends React.Component {
     let url = `${PRODUCT_DETAIL_URL}${productId}`;
     nativeFetch(url)
       .then(res => {
-        // console.log(">>>>> product details >>>>>>", res);
         this.loadState(res);
-        let { toggleFooter, footerVisible, toggleLoader } = this.props;
+        let { toggleFooter, toggleLoader } = this.props;
         toggleFooter && toggleFooter(true);
         toggleLoader && toggleLoader(false);
       })
@@ -47,7 +47,7 @@ class ProductDetail extends React.Component {
       let { _id, name } = element;
       //find in options to get available options for the product
       let attributeOptions = options.filter((option = {}) => {
-        return option.attrib_id == _id;
+        return option.attrib_id === _id;
       });
       availableAttributes[name] = [...attributeOptions];
     });
@@ -55,10 +55,10 @@ class ProductDetail extends React.Component {
     let selectedAttributes = {};
     selected_option_ids.forEach(selectedId => {
       //find in  available color attributes and find in available storage available
-      Object.keys(availableAttributes).map(availableAttributeKey => {
+      Object.keys(availableAttributes).forEach(availableAttributeKey => {
         let selectedAttribute = availableAttributes[availableAttributeKey].find(attribute => {
           // console.log(">>> availableAttributeKey  ", availableAttributeKey, selectedId, attribute._id);
-          return attribute._id == selectedId;
+          return attribute._id === selectedId;
         });
         if (selectedAttribute) {
           selectedAttributes[availableAttributeKey] = selectedAttribute._id;
@@ -90,9 +90,9 @@ class ProductDetail extends React.Component {
     return Object.assign({}, primary_product, product_variation_detail);
   };
 
-  selectColor = colorId => {
+  attributeSelector = (key, id) => {
     let { selectedAttributes, primary_product, product_variations } = this.state;
-    selectedAttributes["Colour"] = colorId;
+    selectedAttributes[key] = id;
     let product_details = this.getProductDetails({
       primary_product,
       product_variations,
@@ -105,17 +105,10 @@ class ProductDetail extends React.Component {
     });
   };
 
-  selectStorage = storageId => {
-    let { selectedAttributes, primary_product, product_variations } = this.state;
-    selectedAttributes["Storage"] = storageId;
-    let product_details = this.getProductDetails({
-      primary_product,
-      product_variations,
-      selected_option_ids: Object.values(selectedAttributes)
-    });
+  quantitySelector = count => {
+    if (!count) return;
     this.setState({
-      selectedAttributes: selectedAttributes,
-      product_details
+      count: count
     });
   };
 
@@ -126,8 +119,9 @@ class ProductDetail extends React.Component {
         product_details={product_details}
         selectedAttributes={selectedAttributes}
         availableAttributes={availableAttributes}
-        selectColor={this.selectColor}
-        selectStorage={this.selectStorage}
+        attributeSelector={this.attributeSelector}
+        quantitySelector={this.quantitySelector}
+        quantity={this.state.count}
       />
     );
   }

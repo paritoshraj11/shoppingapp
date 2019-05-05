@@ -24,18 +24,20 @@ export default class MyComponent extends React.Component {
           value={this.state.value}
           arrowLeft={
             <div className="left-arrow-container">
-              <i class="fas fa-angle-left left-arrow-icon" />
+              <i className="fas fa-angle-left left-arrow-icon" />
             </div>
           }
           arrowRight={
             <div className="right-arrow-container">
-              <i class="fas fa-angle-right right-arrow-icon" />
+              <i className="fas fa-angle-right right-arrow-icon" />
             </div>
           }
           addArrowClickHandler
         >
           {images.map(image => {
-            return <img src={image} className="coursel__image" style={{}} />;
+            return (
+              <img src={image} key={`${image}__key`} alt="carousel__image" className="coursel__image" style={{}} />
+            );
           })}
         </Carousel>
         <Dots

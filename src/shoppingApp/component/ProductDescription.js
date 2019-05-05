@@ -4,7 +4,16 @@ import ColorSelector from "./ColorSelector";
 import StorageSelector from "./StorageSelector";
 import { Col, Row, Button } from "reactstrap";
 import TextDescriptor from "./TextDescriptor";
-export default ({ product_details, selectedAttributes, availableAttributes, selectColor, selectStorage }) => {
+export default ({
+  product_details,
+  selectedAttributes,
+  availableAttributes,
+  selectColor,
+  selectStorage,
+  attributeSelector,
+  quantitySelector,
+  quantity
+}) => {
   let { name, desc, sale_price, mark_price, sale_msg = "" } = product_details;
   return (
     <div className="product-description__container">
@@ -37,6 +46,7 @@ export default ({ product_details, selectedAttributes, availableAttributes, sele
             availableAttributes["Colour"].length
           } color availabe`}</span>
           <ColorSelector
+            attributeSelector={attributeSelector}
             Color={availableAttributes["Colour"]}
             selectedAttributes={selectedAttributes}
             selectColor={selectColor}
@@ -47,13 +57,14 @@ export default ({ product_details, selectedAttributes, availableAttributes, sele
             availableAttributes["Storage"].length
           } storage availabe`}</span>
           <StorageSelector
+            attributeSelector={attributeSelector}
             selectStorage={selectStorage}
             Storage={availableAttributes["Storage"]}
             selectedAttributes={selectedAttributes}
           />
         </Col>
         <Col xs={12} md={12} style={{ paddingTop: 5, paddingBottom: 5 }}>
-          <QuantitySelector />
+          <QuantitySelector quantitySelector={quantitySelector} quantity={quantity} />
         </Col>
         <Col xs={12} md={12} className=" p10">
           <Row>

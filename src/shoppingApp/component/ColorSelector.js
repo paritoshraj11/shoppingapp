@@ -1,20 +1,21 @@
 import React from "react";
 
 const getColor = (name = "") => {
-  if (name.toLocaleLowerCase() == "rose gold") return "#b76e79";
-  if (name.toLocaleLowerCase() == "black grey") return "#A9A9A9";
+  if (name.toLocaleLowerCase() === "rose gold") return "#b76e79";
+  if (name.toLocaleLowerCase() === "black grey") return "#A9A9A9";
   return name;
 };
-const ColorSelector = ({ Color, selectedAttributes, selectColor }) => {
+const ColorSelector = ({ Color, selectedAttributes, attributeSelector }) => {
   return (
     <div className="attribute_selector_container">
       {Color.map(color => {
         let { _id, name = "" } = color;
-        let isSelected = selectedAttributes["Colour"] == _id;
+        let isSelected = selectedAttributes["Colour"] === _id;
         return (
           <div
+            key={_id}
             onClick={() => {
-              selectColor && selectColor(_id);
+              attributeSelector && attributeSelector("Colour", _id);
             }}
             className="color_selector_box"
             style={{

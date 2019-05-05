@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from "reactstrap";
 
@@ -22,21 +20,23 @@ export default class Example extends React.Component {
       <div>
         <Navbar color="light" light expand="md" className="shadow-sm  bg-white rounded">
           <Container>
-            <NavbarBrand class="brand_text_style" href="/">MY AWESOME SHOP</NavbarBrand>
+            <NavbarBrand className="brand_text_style" href="/">
+              MY AWESOME SHOP
+            </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/components/">HOME</NavLink>
+                  <NavLink href="/">HOME</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/components/">ABOUT</NavLink>
+                  <NavLink>ABOUT</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/components/">CONTACT</NavLink>
+                  <NavLink>CONTACT</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/components/">BAG</NavLink>
+                  <NavLink>BAG</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>

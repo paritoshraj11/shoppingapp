@@ -4,9 +4,9 @@ import { Container, Row, Col } from "reactstrap";
 const renderItem = ({ product, index }) => {
   let imageSource = product.images && product.images[0];
   return (
-    <Col md={3} xs={6}>
+    <Col md={3} xs={6} key={index + product.name}>
       <Link to={`/item-details/${product._id}`}>
-        <img className="product-card__image" alt="product-image" src={imageSource} />
+        <img className="product-card__image" alt="product__image" src={imageSource} />
         <p className="product-card__name">{product.name}</p>
         <p className="product-card__price">{` ₹ ${Math.ceil(product.sale_price)}`}</p>
       </Link>
