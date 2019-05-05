@@ -18,24 +18,31 @@ export default class MyComponent extends React.Component {
     let { images } = this.props;
     return (
       <div>
-        <Carousel infinite onChange={this.onChange} value={this.state.value}>
+        <Carousel
+          infinite
+          onChange={this.onChange}
+          value={this.state.value}
+          arrowLeft={
+            <div className="left-arrow-container">
+              <i class="fas fa-angle-left left-arrow-icon" />
+            </div>
+          }
+          arrowRight={
+            <div className="right-arrow-container">
+              <i class="fas fa-angle-right right-arrow-icon" />
+            </div>
+          }
+          addArrowClickHandler
+        >
           {images.map(image => {
-            return (
-              <div style={{ height: 400, width: "100%" }}>
-                <img src={image} style={{ height: "100%", width: "100%", objectFit: "contain" }} />
-              </div>
-            );
+            return <img src={image} className="coursel__image" style={{}} />;
           })}
         </Carousel>
         <Dots
           value={this.state.value}
           onChange={this.onChange}
           thumbnails={images.map((image, index) => {
-            return (
-              <div style={{ height: 60, width: 60, background: `url(${image})` }} className="thumbnail_images">
-                {/* <img style={{ maxWidth: "100%", maxHeight: "100%" }} key={index} src={image} /> */}
-              </div>
-            );
+            return <div style={{ height: 60, width: 60, background: `url(${image})` }} className="thumbnail_images" />;
           })}
         />
       </div>

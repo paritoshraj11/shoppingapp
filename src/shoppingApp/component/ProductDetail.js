@@ -1,10 +1,11 @@
 import React from "react";
 import { nativeFetch, isArrayEqaul } from "../clientUtility";
 import ProductDetailScreen from "./ProductDetailScreen";
+import AppContext from "../AppContext";
 
 const PRODUCT_DETAIL_URL = "https://assignment-appstreet.herokuapp.com/api/v1/products/";
 
-export default class ItemDetail extends React.Component {
+class ProductDetail extends React.Component {
   state = {
     data: null
   };
@@ -16,6 +17,9 @@ export default class ItemDetail extends React.Component {
   };
 
   componentDidMount() {
+    let { toggleFooter, footerVisible, toggleLoader } = this.props;
+    toggleFooter && toggleFooter(false);
+    toggleLoader && toggleLoader(true);
     let currentProductId = this.getCurrentId();
     this.loadData(currentProductId);
   }
@@ -26,6 +30,9 @@ export default class ItemDetail extends React.Component {
       .then(res => {
         // console.log(">>>>> product details >>>>>>", res);
         this.loadState(res);
+        let { toggleFooter, footerVisible, toggleLoader } = this.props;
+        toggleFooter && toggleFooter(true);
+        toggleLoader && toggleLoader(false);
       })
       .catch(err => {
         console.log(">>>> err in loading data>>>>", err);
@@ -125,3 +132,13 @@ export default class ItemDetail extends React.Component {
     );
   }
 }
+
+export default props => {
+  return (
+    <AppContext.Consumer>
+      {value => {
+        return <ProductDetail {...value} {...props} />;
+      }}
+    </AppContext.Consumer>
+  );
+};

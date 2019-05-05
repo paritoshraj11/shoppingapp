@@ -20,6 +20,20 @@ html {
   padding: 20px;
 }
 
+.pt20 {
+  padding-top: 20px;
+}
+
+.brand_text_style {
+  font-size: 16px;
+}
+
+.coursel__image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
 .thumbnail_images {
   background-size: 100% 100% !important;
   background-position: center !important;
@@ -35,8 +49,9 @@ code {
 }
 
 .product-card__image {
-  height: 20vw !important;
+  height: 12vw !important;
   width: 100%;
+  object-fit: contain;
 }
 
 .product-card__name {
@@ -63,6 +78,62 @@ code {
   margin: 0 0 2px 0;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.left-arrow-container {
+  position: absolute;
+  z-index: 22;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-arrow-icon {
+  text-align: center;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  left: -2px;
+  position: relative;
+}
+
+.right-arrow-container {
+  position: absolute;
+  z-index: 22;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-arrow-icon {
+  text-align: center;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+/* .modal-open {
+  padding-right: 0 !important;
+} */
+
+.product-description__more_text {
+  margin: 2px 0 0 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3eada1;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .product-description__text {
@@ -93,6 +164,7 @@ code {
   align-items: center;
   padding: 8px 18px 8px 8px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .color_selector_circle {
@@ -111,13 +183,101 @@ code {
   border-radius: 5px;
   border: 1px solid rgb(217, 217, 217);
   margin-right: 20px;
+  cursor: pointer;
 }
-.p10{
-  padding: 10px 0 10px 0
+.p10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
+.BrainhubCarousel__track {
+  height: 400px;
+}
+
+.footer {
+  background-color: black;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  color: white;
+  font-size: 12px;
+  padding: 20px;
+}
+
+.footer-container > *:not(:last-child) {
+  border-right: 1px solid white;
+}
+.footer-container > * {
+  padding: 0 20px;
+}
+
+.footer-container > *:first-child {
+  padding-left: 0;
+}
 @media only screen and (max-width: 576px) {
   .product-card__image {
-    height: 40vw !important;
+    height: 35vw !important;
+  }
+
+  .footer-container > * {
+    text-align: center;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .brand_text_style {
+    font-size: 14px;
+  }
+
+  .BrainhubCarousel__track {
+    height: 300px;
+  }
+}
+
+.add_to_cart_button {
+  font-size: 12px;
+  border-width: 0px;
+  background-color: #3eada1;
+}
+
+.shopping-app__loader {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.quantity_selector_container {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #3eada1;
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.quantity_selector_box {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .BrainhubCarousel__track {
+    height: 350px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .BrainhubCarousel__track {
+    height: 400px;
   }
 }

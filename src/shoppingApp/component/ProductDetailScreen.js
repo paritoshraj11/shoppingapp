@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ImageCarousel from "./ImageCarousel";
 import ProductDescription from "./ProductDescription";
+import { Col, Row, Container } from "reactstrap";
+
 export default class ProductDetailScreen extends Component {
   render() {
     let { product_details } = this.props;
@@ -8,16 +10,16 @@ export default class ProductDetailScreen extends Component {
       return null;
     }
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 ">
+      <Container>
+        <Row className="pt20">
+          <Col md={6}>
             <ImageCarousel images={product_details.images} />
-          </div>
-          <div className="col-md-6 ">
+          </Col>
+          <Col md={6}>
             <ProductDescription {...this.props} />
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

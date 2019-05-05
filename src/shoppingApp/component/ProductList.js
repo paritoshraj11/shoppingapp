@@ -1,41 +1,42 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import AppContext from "../AppContext";
 import ProductListScreen from "./ProductListScreen";
-const nativeFetch = (page = 1) => {
-  return axios.get(`https://assignment-appstreet.herokuapp.com/api/v1/products?page=${page}`).then(result => {
-    //passing data only and left error handling on  function which call one
-    return result.data;
-  });
-};
+import { nativeFetch } from "../clientUtility";
+
+const PRODUCT_LIST_URL = "https://assignment-appstreet.herokuapp.com/api/v1/products?page=";
 
 class ProductListContainer extends React.Component {
   state = {
     products: [],
-    page: 1
+    page: 0
   };
   componentDidMount() {
-    nativeFetch(this.state.page)
+    let { toggleFooter } = this.props;
+    toggleFooter && toggleFooter(false);
+    let { page } = this.state;
+    this.fetchData(page + 1);
+  }
+
+  fetchData = nextPage => {
+    let { toggleFooter, toggleLoader } = this.props;
+    toggleLoader && toggleLoader(true);
+    let url = PRODUCT_LIST_URL + nextPage;
+    nativeFetch(url)
       .then(data => {
         let { products } = data;
-        this.setState({ products });
+        this.setState({ products: [...this.state.products, ...products], page: nextPage });
+        toggleFooter && toggleFooter(true);
+        toggleLoader && toggleLoader(false);
       })
       .catch(err => {
-        console.log("error >>>", err);
+        alert("error in network call >>>", err);
       });
-  }
+  };
 
   laodMoreData = () => {
     let nextPage = this.state.page + 1;
-    nativeFetch(nextPage)
-      .then(data => {
-        let { products } = data;
-        let newProducts = [...this.state.products, ...products];
-        this.setState({ page: nextPage, products: newProducts });
-      })
-      .catch(err => {
-        console.log("error in laod more >>>", err);
-      });
+    this.fetchData(nextPage);
   };
   render() {
     let {
@@ -45,4 +46,12 @@ class ProductListContainer extends React.Component {
   }
 }
 
-export default ProductListContainer;
+export default props => {
+  return (
+    <AppContext.Consumer>
+      {value => {
+        return <ProductListContainer {...value} {...props} />;
+      }}
+    </AppContext.Consumer>
+  );
+};

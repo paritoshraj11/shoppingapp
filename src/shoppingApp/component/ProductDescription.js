@@ -2,23 +2,27 @@ import React from "react";
 import QuantitySelector from "./QuantitySelector";
 import ColorSelector from "./ColorSelector";
 import StorageSelector from "./StorageSelector";
-
+import { Col, Row, Button } from "reactstrap";
+import TextDescriptor from "./TextDescriptor";
 export default ({ product_details, selectedAttributes, availableAttributes, selectColor, selectStorage }) => {
+  let { name, desc, sale_price, mark_price, sale_msg = "" } = product_details;
   return (
     <div className="product-description__container">
-      <p className="product-description__title">{product_details.name}</p>
+      <p className="product-description__title">{name}</p>
       <div className="product-description__title__border" />
-      <p className="product-description__text text-secondary ">{product_details.desc}</p>
+      <TextDescriptor desc={desc} modalTitle={name} />
       <div className="dropdown-divider product-description__dividor " />
       <div className="p10">
-        <span className="font-weight-bold">{`₹ ${Math.ceil(product_details.sale_price)}`}</span>
+        <span className="font-weight-bold">{`₹ ${Math.ceil(sale_price)}`}</span>
         <span className="pl-2 font-weight-bold text-secondary" style={{ fontSize: 10 }}>
-          <del>{`₹ ${product_details.mark_price}`}</del>
+          <del>{`₹ ${mark_price}`}</del>
         </span>
         <div>
-          <span style={{ color: "#47b6ab", fontSize: 12 }}>{`You Save ₹ ${Math.ceil(
-            product_details.mark_price - product_details.sale_price
-          )} `}</span>
+          <span style={{ color: "#47b6ab", fontSize: 12 }}>{`You Save ₹ ${Math.ceil(mark_price - sale_price)} `}</span>
+          <span style={{ color: "#47b6ab", fontSize: 12 }}>{`( ${sale_msg.slice(
+            0,
+            sale_msg.indexOf("%") + 1
+          )} )`}</span>
         </div>
         <div>
           <span className="text-secondary" style={{ fontSize: 10 }}>
@@ -27,8 +31,8 @@ export default ({ product_details, selectedAttributes, availableAttributes, sele
         </div>
       </div>
       <div className="dropdown-divider  product-description__dividor" />
-      <div className="row">
-        <div className="col-12">
+      <Row className="row">
+        <Col xs={12} md={12}>
           <span className="text-secondary" style={{ fontSize: 12 }}>{`${
             availableAttributes["Colour"].length
           } color availabe`}</span>
@@ -37,8 +41,8 @@ export default ({ product_details, selectedAttributes, availableAttributes, sele
             selectedAttributes={selectedAttributes}
             selectColor={selectColor}
           />
-        </div>
-        <div className="col-12 p10">
+        </Col>
+        <Col xs={12} md={12} className=" p10">
           <span className="text-secondary" style={{ fontSize: 12 }}>{`${
             availableAttributes["Storage"].length
           } storage availabe`}</span>
@@ -47,24 +51,20 @@ export default ({ product_details, selectedAttributes, availableAttributes, sele
             Storage={availableAttributes["Storage"]}
             selectedAttributes={selectedAttributes}
           />
-        </div>
-        <div className="col-12 " style={{ paddingTop: 5, paddingBottom: 5 }}>
+        </Col>
+        <Col xs={12} md={12} style={{ paddingTop: 5, paddingBottom: 5 }}>
           <QuantitySelector />
-        </div>
-        <div className="col-12 p10">
-          <div className="row">
-            <div className="col-md-8 ">
-              <button
-                type="button"
-                style={{ fontSize: 12, backgroundColor: "#3eada1" }}
-                class="btn btn-primary btn-lg btn-block border-0"
-              >
+        </Col>
+        <Col xs={12} md={12} className=" p10">
+          <Row>
+            <Col md={8}>
+              <Button size="lg" block className="add_to_cart_button">
                 Add to cart
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     </div>
   );
 };

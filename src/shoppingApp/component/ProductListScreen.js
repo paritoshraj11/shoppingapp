@@ -1,39 +1,50 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { Container, Row, Col } from "reactstrap";
 const renderItem = ({ product, index }) => {
   let imageSource = product.images && product.images[0];
   return (
-    <div className="col-md-3  col-6 ">
+    <Col md={3} xs={6}>
       <Link to={`/item-details/${product._id}`}>
         <img className="product-card__image" alt="product-image" src={imageSource} />
         <p className="product-card__name">{product.name}</p>
         <p className="product-card__price">{` ₹ ${Math.ceil(product.sale_price)}`}</p>
       </Link>
-    </div>
+    </Col>
   );
 };
 
-const ProductListScreen = ({ data = [], laodMoreData }) => {
-  if (!data.length) {
-    return null;
+class ProductListScreen extends React.Component {
+  componentDidMount() {
+    window.addEventListener("scroll", this.onScrollEvent);
   }
 
-  window.onscroll = () => {
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScrollEvent);
+  }
+
+  onScrollEvent = () => {
+    let { laodMoreData } = this.props;
     if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-      console.log("end to the reached");
       laodMoreData && laodMoreData();
     }
   };
-  return (
-    <div className="container">
-      <div className="row  product_list_container">
-        {data.map((product, index) => {
-          return renderItem({ product, index });
-        })}
-      </div>
-    </div>
-  );
-};
 
+  render() {
+    let { data } = this.props;
+    if (!data.length) {
+      return null;
+    }
+
+    return (
+      <Container>
+        <Row className="product_list_container pt20">
+          {data.map((product, index) => {
+            return renderItem({ product, index });
+          })}
+        </Row>
+      </Container>
+    );
+  }
+}
 export default ProductListScreen;
