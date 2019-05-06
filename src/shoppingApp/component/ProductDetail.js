@@ -35,7 +35,7 @@ class ProductDetail extends React.Component {
         toggleLoader && toggleLoader(false);
       })
       .catch(err => {
-        console.log(">>>> err in loading data>>>>", err);
+        alert(">>>> err in network call >>>>", err);
       });
   };
 

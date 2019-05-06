@@ -8,7 +8,8 @@ const PRODUCT_LIST_URL = "https://assignment-appstreet.herokuapp.com/api/v1/prod
 class ProductListContainer extends React.Component {
   state = {
     products: [],
-    page: 0
+    page: 0,
+    hasMore: true
   };
   componentDidMount() {
     let { toggleFooter } = this.props;
@@ -23,7 +24,14 @@ class ProductListContainer extends React.Component {
     let url = PRODUCT_LIST_URL + nextPage;
     nativeFetch(url)
       .then(data => {
-        let { products } = data;
+        let { products = [] } = data;
+        if (!products.length) {
+          //when fetching products data from server and it give blank array that means server has no more data
+          //then set hasNext false
+          this.setState({
+            hasMore: false
+          });
+        }
         this.setState({ products: [...this.state.products, ...products], page: nextPage });
         toggleFooter && toggleFooter(true);
         toggleLoader && toggleLoader(false);
@@ -35,7 +43,10 @@ class ProductListContainer extends React.Component {
 
   laodMoreData = () => {
     let nextPage = this.state.page + 1;
-    this.fetchData(nextPage);
+    if (this.state.hasMore) {
+      //if server has more data then make call otherwise ignore call
+      this.fetchData(nextPage);
+    }
   };
   render() {
     let {

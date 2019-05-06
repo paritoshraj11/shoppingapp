@@ -25,7 +25,7 @@ class ProductListScreen extends React.Component {
 
   onScrollEvent = () => {
     let { laodMoreData } = this.props;
-    if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+    if (document.documentElement.offsetHeight - (window.innerHeight + document.documentElement.scrollTop) < 150) {
       laodMoreData && laodMoreData();
     }
   };
